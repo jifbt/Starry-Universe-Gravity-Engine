@@ -1,5 +1,5 @@
 # Starry Universe Gravity Engine
-![](/images/simulation.png)
+![simulation.png](/images/simulation.png)
 Starry Universe Gravity Engine, a space engine made with python turtle.
 - Python envoriment: `Python 3.0+`, maybe `Python 2.6+`.
 - Operate System: `Windows 7+`, maybe `Windows 95+`.
