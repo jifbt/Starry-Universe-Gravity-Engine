@@ -2,7 +2,7 @@ from turtle import *
 from math import *
 from _tkinter import TclError
 '''
-    SUG Engine v0.2.7
+    SUG Engine v0.2.8
     file structure:
         num
         position-x
@@ -46,7 +46,7 @@ class Gravity_system:
         self.simulate_acc = similate_acc
         self.display_freq = display_freq
         self.background_color = background_color
-        bgcolor(background)
+        bgcolor(background_color)
         title('SUG Engine')
         delay(0)
         self.cnt = 0
@@ -88,7 +88,7 @@ class Gravity_system:
             self.stars[y].gravity = 0
         for i in range(self.num):
             for j in range(self.num):
-                if i == j:
+                if i == j or self.stars[j].gravity == 0:
                     continue
                 self.stars[i].velocity += ((self.stars[j].position - 
                                      self.stars[i].position) *
@@ -113,8 +113,8 @@ def main():
         color = f[7].split()
         simulate_acc = float(f[8])
         display_freq = int(f[9])
-        background = f[10]
-    gravity_system = Gravity_system(simulate_acc, display_freq)
+        background_color = f[10]
+    gravity_system = Gravity_system(simulate_acc, display_freq, background_color)
     for i in range(num):
         gravity_system.add_star(Star(position[i], velocity[i],
                                      gravity[i], radii[i], color[i]))
