@@ -73,17 +73,17 @@ class Gravity_system:
             self.stars[y].painter.ht()
             self.stars[y].painter.penup()
             self.stars[x].velocity = 1 / (self.stars[x].gravity +
-                                          self.stars[y].gravity) * \
-                                          (self.stars[x].velocity *
-                                           self.stars[x].gravity +
-                                           self.stars[y].velocity *
-                                           self.stars[y].gravity)
+                                         self.stars[y].gravity) * \
+                                         (self.stars[x].velocity *
+                                         self.stars[x].gravity +
+                                         self.stars[y].velocity *
+                                         self.stars[y].gravity)
             self.stars[x].position = 1 / (self.stars[x].gravity +
-                                          self.stars[y].gravity) * \
-                                          (self.stars[x].position *
-                                           self.stars[x].gravity +
-                                           self.stars[y].position *
-                                           self.stars[y].gravity)
+                                         self.stars[y].gravity) * \
+                                         (self.stars[x].position *
+                                         self.stars[x].gravity +
+                                         self.stars[y].position *
+                                         self.stars[y].gravity)
             self.stars[x].gravity += self.stars[y].gravity
             self.stars[y].gravity = 0
         for i in range(self.num):
@@ -91,11 +91,11 @@ class Gravity_system:
                 if i == j or self.stars[j].gravity == 0:
                     continue
                 self.stars[i].velocity += ((self.stars[j].position - 
-                                     self.stars[i].position) *
-                                    self.stars[j].gravity * 
-                                    abs(self.stars[j].position -
-                                        self.stars[i].position) ** -3) * \
-                                    self.simulate_acc
+                                          self.stars[i].position) *
+                                          self.stars[j].gravity * 
+                                          abs(self.stars[j].position -
+                                              self.stars[i].position) ** -3) * \
+                                          self.simulate_acc
             self.stars[i].position += self.stars[i].velocity * self.simulate_acc
             if self.cnt % self.display_freq == 0:
                 self.stars[i].goto()
