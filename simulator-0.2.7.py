@@ -88,7 +88,7 @@ class Gravity_system:
             self.stars[y].gravity = 0
         for i in range(self.num):
             for j in range(self.num):
-                if i == j or self.stars[j].gravity == 0:
+                if i == j:
                     continue
                 self.stars[i].velocity += ((self.stars[j].position - 
                                      self.stars[i].position) *
