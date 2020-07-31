@@ -6,6 +6,7 @@ Starry Universe Gravity Engine, a space engine made with python turtle.
 - Most recent version: `0.2.0c1 2020y105d`.
 - Most recent release: `0.1.0 2020y104d.py`.
 - Version introduce:
-  - 0.0: The first minor version of the simulator. In this minor version, all the argumets are in the code and it uses a simple main loop to do all the calculation.
-  - 0.1: The second minor version of the simulator. In this minor version, users can configure arguments by a .cfg file called SUGE.cfg.
-  - 0.2: The third minor version of the simulator. In this minor version, we uses object-oriented programming instead of the main loop.
+  - 0.0: all the argumets are in the code and it uses a simple main loop to do all the calculation.
+  - 0.1: Now you can configure arguments by a .cfg file called SUGE.cfg. _In 0.1.0 it is called `sus.cfg`._
+  - 0.2: We use object-oriented programming instead of the main loop.
+  - 0.3: You can use command line arguments now! _For help, type `0.3.x.py --help`._
