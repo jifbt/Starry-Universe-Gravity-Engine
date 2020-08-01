@@ -1,8 +1,4 @@
-from turtle import *
-from math import *
-from _tkinter import TclError
 '''
-    SUG Enging v0.1.7
     file structure:
         num
         position-x
@@ -16,6 +12,8 @@ from _tkinter import TclError
         display_freq
         background_color
 '''
+from turtle import *
+from _tkinter import TclError
 def main():
     with open('SUGE.cfg') as file:
         f = file.readlines()
@@ -30,34 +28,34 @@ def main():
         simulate_acc = float(f[8])
         display_freq = int(f[9])
         background_color = f[10]
-    t = []
+    painter = []
     arr = []
     cnt = 0
     bgcolor(background_color)
     title('SUG Engine')
     delay(0)
     for i in num:
-        t.append(Turtle())
-        t[i].pencolor(color[i])
-        t[i].speed(0)
-        t[i].penup()
-        t[i].goto(position[i])
-        t[i].shape('circle')
-        t[i].shapesize(stretch_wid = radius[i])
-        t[i].dot(5)
-        t[i].pendown()
+        painter.append(Turtle())
+        painter[i].pencolor(color[i])
+        painter[i].speed(0)
+        painter[i].penup()
+        painter[i].goto(position[i])
+        painter[i].shape('circle')
+        painter[i].shapesize(stretch_wid = radius[i])
+        painter[i].dot(5)
+        painter[i].pendown()
     while True:
         arr.clear()
         for i in num:
             for j in num:
                 if i < j and (gravity[i] != 0 or gravity[j] != 0) and \
-                   t[i].isvisible() and t[j].isvisible() and abs(position[j] - position[i]) < 1:
+                   painter[i].isvisible() and painter[j].isvisible() and abs(position[j] - position[i]) < 1:
                     arr.append((i, j))
         for i, j in arr:
             x = i if gravity[i] > gravity[j] else j
             y = j if gravity[i] > gravity[j] else i
-            t[y].ht()
-            t[y].penup()
+            painter[y].ht()
+            painter[y].penup()
             velocity[x] = 1 / (gravity[x] + gravity[y]) * (velocity[x] * gravity[x] + velocity[y] * gravity[y])
             position[x] = 1 / (gravity[x] + gravity[y]) * (position[x] * gravity[x] + position[y] * gravity[y])
             gravity[x] += gravity[y]
@@ -70,7 +68,7 @@ def main():
         for i in num:
             position[i] += velocity[i] * simulate_acc
             if cnt % display_freq == 0:
-                t[i].goto(position[i])
+                painter[i].goto(position[i])
         cnt += 1
 if __name__ == '__main__':
     try:
