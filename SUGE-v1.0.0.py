@@ -1,6 +1,6 @@
 '''
-    obj structure:
-        range(num)
+    file structure:
+        num
         position-x
         position-y
         velocity-x
