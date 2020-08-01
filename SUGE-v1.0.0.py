@@ -28,7 +28,6 @@ def main():
     position = [Vec2D(obj['px'][i], obj['py'][i]) for i in range(num)]
     velocity = [Vec2D(obj['vx'][i], obj['vy'][i]) for i in range(num)]
     gravity = get(obj, num, 'g')
-    print(gravity)
     radii = get(obj, num, 'r', [0.3] * num)
     color = get(obj, num, 'c')
     simulate_acc = get(obj, num, 'sac', 0.001, False)
