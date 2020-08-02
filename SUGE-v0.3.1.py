@@ -1,5 +1,5 @@
 '''
-    SUG Engine v0.3.0
+    SUG Engine v0.3.1
     SUGE.py [-v version] -n number -px position-x -py position-y
             -vx velocity-x -vy velocity-y [-g gravity|-gAll gravity]
             [-r radii<default:0.3>|-rAll radii] [-c color|-cAll color]
