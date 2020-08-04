@@ -1,5 +1,5 @@
 '''
-    SUG Engine v1.0.2pre1
+    SUG Engine v1.0.2pre2
     SUGE.py  -n number -px position-x -py position-y
             -vx velocity-x -vy velocity-y -g gravity[1]
             [-r radii<0.3>] -c gravity[1]
@@ -8,7 +8,7 @@
             [-bg background_color<black>]
     SUGE.py [-f file-path<"SUGE.json">]
     [1] accept length 1/number object(s).
-        -gAll, -rAll, -cAll are aliases for -g, -r, -c.
+        -gAll, -rAll, -cAll are aliases for -g, -r, -c. 
     file structure:
         num
         position-x
@@ -112,6 +112,12 @@ class Gravity_system:
         self.cnt += 1
         
 def parse_args():
+    '''
+        parse_args(): return 
+        @return @deprecated 1.0.2 a tuple of (args, lens, keys)
+        @return @since 1.0.2 args(argument split by words begin with '-' in
+        sys.argv)
+    '''
     args = {}
     for i in sys.argv[1:]:
         if i.startswith('-') and not i[1].isdigit():
@@ -121,13 +127,14 @@ def parse_args():
             args[tmp].append(i)
     return args
 def get(obj, num, key, default = None, ls = True):
+    '''
     if key not in obj and default:
         return default
     elif len(obj) == num or not ls:
         return obj[key]
     else:
         return [obj[key]] * num
-def get2(obj, num, key, default = None, typ = list, hasAlias = False):
+def get2(obj, num, key, default = None, ls = True, cls = float, hasAlias = False):
     if key not in obj and default:
         if '{}All'.format(key) in obj and hasAlias:
             return obj['{}All'.format(key)] * num
@@ -142,10 +149,10 @@ def main():
     keys = list(args.keys())
     if ['-ver'] == keys:
         print(__doc__.splitlines()[1][4:])
-        return 0
+        return
     elif ['-help'] == keys:
         print(__doc__)
-        return 0
+        return
     elif ['f'] == keys or [] == keys:
         path = args['f'][0] if keys else 'SUGE.json'
         obj = json.load(open(path))
@@ -161,7 +168,7 @@ def main():
     else:
         path = args['f'][0] if keys else 'SUGE.json'
         obj = args
-        num = args['num']
+        num = args['num'][0]
         position = [Vec2D(int(obj['px'][i]),
                           int(obj['py'][i])) for i in range(num)]
         velocity = [Vec2D(int(obj['vx'][i]),
