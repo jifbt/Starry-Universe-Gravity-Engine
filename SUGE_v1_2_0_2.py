@@ -1,5 +1,5 @@
 '''
-    SUG Engine v1.0.2pre2
+    SUG Engine v1.2.0pre2
     SUGE.py  -n number -px position-x -py position-y
             -vx velocity-x -vy velocity-y -g gravity[1]
             [-r radii<0.3>] -c gravity[1]
