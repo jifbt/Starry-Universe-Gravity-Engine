@@ -1,5 +1,5 @@
 '''
-    SUG Engine v1.2.0pre2
+    SUG Engine v1.2.0
     SUGE.py  -n number -px position-x -py position-y
             -vx velocity-x -vy velocity-y -g gravity[1]
             [-r radii<0.3>] -c gravity[1]
@@ -27,6 +27,11 @@ from _tkinter import TclError
 import sys
 import json
 class Star:
+    '''
+        A 2D celestial body with initial position and velocity,
+        gravity(mass), radius and color.
+        Painter is used if given or else it will use a new painter.
+    '''
     def __init__(self, position, velocity, gravity, radius,
                  color, painter = None):
         self.position = position
@@ -49,7 +54,11 @@ class Star:
                          self.gravity,
                          self.turtle)
 class Gravity_system:
-    def __init__(self, similate_acc, display_freq,
+    '''
+        A set of celestial bodys given as Star objects.
+        The initial celestial bodys can be given if needed.
+    '''
+    def __init__(self, similate_acc = 0.001, display_freq = 1000,
                  background_color = 'black', num = 0, stars = None):
         self.num = num
         self.stars = stars or []
@@ -61,12 +70,21 @@ class Gravity_system:
         delay(0)
         self.cnt = 0
     def add_star(self, star):
+        '''
+            Add a star to the set.
+        '''
         self.num += 1
         self.stars.append(star)
     def remove_star(self, star_no):
+        '''
+            Remove a star to the set.
+        '''
         self.num -= 1
         return self.stars.pop(star_no)
     def simulate(self):
+        '''
+            Simulate for one step.
+        '''
         self.stars = self.stars.copy()
         collede_list = []
         for i in range(self.num):
@@ -110,40 +128,45 @@ class Gravity_system:
             if self.cnt % self.display_freq == 0:
                 self.stars[i].goto()
         self.cnt += 1
-        
+
 def parse_args():
     '''
-        parse_args(): return 
-        @return @deprecated 1.0.2 a tuple of (args, lens, keys)
-        @return @since 1.0.2 args(argument split by words begin with '-' in
-        sys.argv)
+        return argument split by words begin with '-' from command line.
     '''
     args = {}
     for i in sys.argv[1:]:
         if i.startswith('-') and not i[1].isdigit():
-            tmp = i
-            args[i[1:]] = []
+            key_now = i
+            args[i] = []
         else:
-            args[tmp].append(i)
+            args[key_now].append(i)
     return args
 def get(obj, num, key, default = None, ls = True):
     '''
-    if key not in obj and default:
+        return values from .json objects.
+    '''
+    if key not in obj:
         return default
-    elif len(obj) == num or not ls:
+    elif not ls or len(obj[key]) == num:
         return obj[key]
     else:
         return [obj[key]] * num
 def get2(obj, num, key, default = None, ls = True, cls = float, hasAlias = False):
-    if key not in obj and default:
+    '''
+        return values from command line.
+    '''
+    if key not in obj:
         if '{}All'.format(key) in obj and hasAlias:
-            return obj['{}All'.format(key)] * num
+            return cls(obj['{}All'.format(key)]) * num
         else:
             return default
-    elif isinstance(obj[key], list) or not typ == list:
-        return typ(obj[key])
+    elif not ls:
+        return cls(obj[key][0])
+    elif len(obj[key]) == num:
+        return list(map(cls, obj[key]))
     else:
-        return obj[key] * num
+        print([cls(obj[key][0])] * num)
+        return [cls(obj[key][0])] * num
 def main():
     args = parse_args()
     keys = list(args.keys())
@@ -163,22 +186,22 @@ def main():
         radii = get(obj, num, 'r', [0.3] * num)
         color = get(obj, num, 'c')
         simulate_acc = get(obj, num, 'sac', 0.001, False)
-        display_freq = get(obj, num, 'dfq', 1000, False)
+        display_freq = get(obj, num, 'dfq', 1000, False, int)
         background_color = get(obj, num, 'bg', 'black', False)
     else:
-        path = args['f'][0] if keys else 'SUGE.json'
         obj = args
-        num = args['num'][0]
-        position = [Vec2D(int(obj['px'][i]),
-                          int(obj['py'][i])) for i in range(num)]
-        velocity = [Vec2D(int(obj['vx'][i]),
-                          int(obj['vy'][i])) for i in range(num)]
-        gravity = get2(args, num, 'g', hasAlias = True)
-        radii = get2(args, num, 'r', [0.3] * num, hasAlias = True)
-        color = get2(args, num, 'c', hasAlias = True)
-        simulate_acc = get2(args, num, 'sac', 0.001, False)
-        display_freq = get2(args, num, 'dfq', 1000, False)
-        background_color = get2(args, num, 'bg', 'black', False)
+        print(obj)
+        num = int(args['-num'][0])
+        position = [Vec2D(float(obj['-px'][i]),
+                          float(obj['-py'][i])) for i in range(num)]
+        velocity = [Vec2D(float(obj['-vx'][i]),
+                          float(obj['-vy'][i])) for i in range(num)]
+        gravity = get2(args, num, '-g', hasAlias = True)
+        radii = get2(args, num, '-r', [0.3] * num, hasAlias = True)
+        color = get2(args, num, '-c', cls = str, hasAlias = True)
+        simulate_acc = get2(args, num, '-sac', 0.001, False)
+        display_freq = get2(args, num, '-dfq', 1000, False)
+        background_color = get2(args, num, '-bg', 'black', False, str)
     gravity_system = Gravity_system(simulate_acc, display_freq, background_color)
     for i in range(num):
         gravity_system.add_star(Star(position[i], velocity[i],
