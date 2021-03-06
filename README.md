@@ -13,3 +13,4 @@ Starry Universe Gravity Engine, a space engine made with python turtle.
   - 0.2: We use object-oriented programming instead of the main loop.
   - 0.3: You can use command line arguments now! _For help, type `SUGE_v3_0_x.py --help`._
   - 1.0 to 1.2: You must use .json file in the commend line instead of .cfg file. This version is the mixture of the previous version from 0.1 to 0.3. _In 1.2.0, the code become simplified and complex mechanism of exception raising by return values is removed._
+  - 2.0: Rewrited with c with incredible speed increase. All the arguments are writed the code.
