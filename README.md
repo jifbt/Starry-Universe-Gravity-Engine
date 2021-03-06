@@ -3,7 +3,7 @@
 Starry Universe Gravity Engine, a space engine made with python turtle.
 - Earliest Python environment required: every python version since `Python 3.0.0`.
 - Earliest Operating System required: 
-  - `Windows`: every version since `Windows 7`.
+  - `Windows`: higher than `Windows 7`.
   - Others: unknown.
 - Latest developing version: `SUGE_v1_2_0.py`.
 - Latest released version: `SUGE_v1_2_0.py`.
