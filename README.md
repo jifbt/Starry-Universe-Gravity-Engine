@@ -1,5 +1,5 @@
 # Starry Universe Gravity Engine
-![powered by sm.ms](https://i.loli.net/2019/12/28/OJKLEFaj3nATWHq.png)
+![](https://raw.githubusercontent.com/Alex-Github-Programmer/Starry-Universe-Gravity-Engine/master/images/simulation.png)
 Starry Universe Gravity Engine, a space engine made with python turtle.
 - Earliest Python environment required: every python version since `Python 3.0.0`.
 - Earliest Operating System required: 
