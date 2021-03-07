@@ -2,7 +2,7 @@
 #include <math.h>
 #include <windows.h>
 int num, display_freq, width, offset[2], count, i, j;
-COLORREF background_color, *color_ptr;
+COLORREF background_color;
 double simulate_acc, distance;
 inline double sqr(double x) {return x * x;}
 DWORD WINAPI threadProc(LPVOID lpParamter) {
@@ -13,7 +13,6 @@ DWORD WINAPI threadProc(LPVOID lpParamter) {
 	HPEN hpen[num];
 	double position[num][2], velocity[num][2], gravity[num];
 	COLORREF color[num];
-	color_ptr = color;
 	for(i=0; i<num; ++i) fscanf(file, "%lf", &position[i][0]);
 	for(i=0; i<num; ++i) fscanf(file, "%lf", &position[i][1]);
 	for(i=0; i<num; ++i) fscanf(file, "%lf", &velocity[i][0]);
