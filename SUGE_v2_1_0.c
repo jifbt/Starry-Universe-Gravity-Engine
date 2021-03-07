@@ -1,21 +1,6 @@
 #include <stdio.h>
 #include <math.h>
 #include <windows.h>
-/*
-#define num 4
-#define width 1
-#define offsetX 683
-#define offsetY 384
-double position[num][2] = {{50, 50}, {-50, 0}, {50, -100}, {50, 300}};
-double velocity[num][2] = {{-5, 2.5}, {5, -2.5}, {0, 2.5}, {10, -2.5}};
-double gravity[num] = {10000, 10000, 10000, 0};
-COLORREF color[num] = {0xffffff, 0x00ffff, 0x0000ff, 0xffff00};
-COLORREF background_color = 0x000000;
-double simulate_acc = 0.00001;
-int display_freq = 1000;
-double distance;
-int count, i, j;
-*/
 int num, display_freq, width, offset[2], count, i, j;
 COLORREF background_color, *color_ptr;
 double simulate_acc, distance;
@@ -53,7 +38,7 @@ DWORD WINAPI threadProc(LPVOID lpParamter) {
 				}
 			}
 		}
-		if(count % display_freq == 0) {a
+		if(count % display_freq == 0) {
 			for(i=0; i<num; ++i) {
 				LineTo(hdc[i], position[i][0] + offset[0], position[i][1] + offset[1]);
 			}
